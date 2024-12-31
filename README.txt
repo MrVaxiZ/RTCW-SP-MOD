@@ -1,5 +1,7 @@
 Return to Castle Wolfenstein single player GPL source release
 =============================================================
+MODIFIED by VaxiZ, it adds more cmdlts and couple cool features
+=============================================================
 
 This file contains the following sections:
 
