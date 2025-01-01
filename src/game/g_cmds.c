@@ -97,13 +97,10 @@ void Cmd_Score_f( gentity_t *ent ) {
 /*
 ==================
 CheatsOk
+Mod Vaxiz - Changed so cheats are always on
 ==================
 */
-qboolean    CheatsOk( gentity_t *ent ) {
-	if ( !g_cheats.integer ) {
-		trap_SendServerCommand( ent - g_entities, va( "print \"Cheats are not enabled on this server.\n\"" ) );
-		return qfalse;
-	}
+qboolean CheatsOk( gentity_t *ent ) {
 	if ( ent->health <= 0 ) {
 		trap_SendServerCommand( ent - g_entities, va( "print \"You must be alive to use this command.\n\"" ) );
 		return qfalse;
@@ -416,6 +413,34 @@ void Cmd_God_f( gentity_t *ent ) {
 	}
 
 	trap_SendServerCommand( ent - g_entities, va( "print \"%s\"", msg ) );
+}
+
+/*
+==================
+Cmd_OneHit_f 
+Made by VaxiZ
+
+Player one hits everything
+
+argv(0) onehit
+==================
+*/
+void Cmd_OneHit_f(gentity_t* ent) {
+	char* msg;
+
+	if (!CheatsOk(ent)) {
+		return;
+	}
+
+	ent->flags ^= FL_ONEHIT;
+	if (!(ent->flags & FL_ONEHIT)) {
+		msg = "OneHit OFF\n";
+	}
+	else {
+		msg = "OneHit ON\n";
+	}
+
+	trap_SendServerCommand(ent - g_entities, va("print \"%s\"", msg));
 }
 
 /*
@@ -2041,7 +2066,6 @@ void ClientCommand( int clientNum ) {
 		return;     // not fully in game yet
 	}
 
-
 	trap_Argv( 0, cmd, sizeof( cmd ) );
 
 	// Ridah, AI Cast debugging
@@ -2100,6 +2124,8 @@ void ClientCommand( int clientNum ) {
 		Cmd_Give_f( ent );
 	} else if ( Q_stricmp( cmd, "god" ) == 0 )  {
 		Cmd_God_f( ent );
+	} else if (Q_stricmp(cmd, "onehit") == 0) {
+		Cmd_OneHit_f( ent );
 	} else if ( Q_stricmp( cmd, "nofatigue" ) == 0 )  {
 		Cmd_Nofatigue_f( ent );
 	} else if ( Q_stricmp( cmd, "notarget" ) == 0 )  {

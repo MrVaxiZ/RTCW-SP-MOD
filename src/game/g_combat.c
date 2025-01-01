@@ -781,10 +781,6 @@ qboolean IsHeadShot( gentity_t *targ, gentity_t *attacker, vec3_t dir, vec3_t po
 	return qfalse;
 }
 
-
-
-
-
 /*
 ==============
 G_ArmorDamage
@@ -898,6 +894,13 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 	int save;
 	int asave;
 	int knockback;
+
+	if (attacker) {											// Null protection
+		if (attacker->flags & FL_ONEHIT && attacker->client && !attacker->aiCharacter) { // Check if flag is set to ON attacker is player and is NOT AI
+			damage = 10000;				
+			// 10k is enough to one shot everything			// Do not add more as there is a chance of int overflow
+		}
+	}
 
 	if ( !targ->takedamage ) {
 		return;
@@ -1045,6 +1048,10 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 		VectorNormalize( dir );
 	}
 
+	if (damage == INT_MAX - 2) {
+		knockback = 0;
+	}
+
 	knockback = damage;
 
 //	if ( knockback > 200 )
@@ -1122,7 +1129,7 @@ void G_Damage( gentity_t *targ, gentity_t *inflictor, gentity_t *attacker,
 		}
 
 		// check for invulnerability // (SA) moved from below so DAMAGE_NO_PROTECTION will still work
-		if ( client && client->ps.powerups[PW_INVULNERABLE] ) { //----(SA)	added
+		if ( client && client->ps.powerups[PW_INVULNERABLE] ) { //----(SA)	added // W.K
 			return;
 		}
 

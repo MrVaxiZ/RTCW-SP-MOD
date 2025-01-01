@@ -52,9 +52,12 @@ If you have questions concerning this license or the applicable additional terms
 
 #define INTERMISSION_DELAY_TIME 1000
 
-
-// gentity->flags
+// VaxiZ COM::
+// Careful with adding these flags! Values can overlap eachother causing unexpected behaviour
+// 
+// gentity->flags 
 #define FL_GODMODE              0x00000010
+#define FL_ONEHIT               0x00010100  
 #define FL_NOTARGET             0x00000020
 #define FL_DEFENSE_CROUCH       0x00000100  // warzombie defense pose
 #define FL_TEAMSLAVE            0x00000400  // not the first on the team
@@ -251,7 +254,9 @@ struct gentity_s {
 	char        *targetShaderNewName;
 	gentity_t   *target_ent;
 
-	float speed;
+	float 
+		
+		;
 	float closespeed;           // for movers that close at a different speed than they open
 	vec3_t movedir;
 

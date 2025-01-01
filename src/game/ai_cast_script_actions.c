@@ -2237,6 +2237,8 @@ AICast_ScriptAction_Teleport
 qboolean AICast_ScriptAction_Teleport( cast_state_t *cs, char *params ) {
 	gentity_t   *dest;
 
+	G_Printf("Params : '%s'\n", params);
+
 	dest =  G_PickTarget( params );
 	if ( !dest ) {
 		G_Error( "AI Scripting: couldn't find teleporter destination: '%s'\n", params );
