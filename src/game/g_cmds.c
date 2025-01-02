@@ -445,6 +445,34 @@ void Cmd_OneHit_f(gentity_t* ent) {
 
 /*
 ==================
+Cmd_Sonic_f
+Made by VaxiZ
+
+Sets player speed to crazy value
+
+argv(0) sonic
+==================
+*/
+void Cmd_Sonic_f(gentity_t* ent) {
+	char* msg;
+
+	if (!CheatsOk(ent)) {
+		return;
+	}
+
+	ent->flags ^= FL_SONIC;
+	if (!(ent->flags & FL_SONIC)) {
+		msg = "Sonic OFF\n";
+	}
+	else {
+		msg = "Sonic ON\n";
+	}
+
+	trap_SendServerCommand(ent - g_entities, va("print \"%s\"", msg));
+}
+
+/*
+==================
 Cmd_Nofatigue_f
 
 Sets client to nofatigue
@@ -2124,8 +2152,10 @@ void ClientCommand( int clientNum ) {
 		Cmd_Give_f( ent );
 	} else if ( Q_stricmp( cmd, "god" ) == 0 )  {
 		Cmd_God_f( ent );
-	} else if (Q_stricmp(cmd, "onehit") == 0) {
+	} else if ( Q_stricmp( cmd, "onehit" ) == 0 || Q_stricmp( cmd, "oh" ) == 0 ) { // It's annoying to type so many letters so I added 'oh' ~VaxiZ
 		Cmd_OneHit_f( ent );
+	} else if (Q_stricmp(cmd, "sonic") == 0) {
+		Cmd_Sonic_f(ent);
 	} else if ( Q_stricmp( cmd, "nofatigue" ) == 0 )  {
 		Cmd_Nofatigue_f( ent );
 	} else if ( Q_stricmp( cmd, "notarget" ) == 0 )  {

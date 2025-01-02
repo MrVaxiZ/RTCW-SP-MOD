@@ -54,10 +54,13 @@ If you have questions concerning this license or the applicable additional terms
 
 // VaxiZ COM::
 // Careful with adding these flags! Values can overlap eachother causing unexpected behaviour
+// When adding your own flags best use : "0x000X0000" where "X" is another number not previously used
 // 
 // gentity->flags 
+#define FL_ONEHIT               0x00010000  // One-hitting enemies
+#define FL_SONIC                0x00020000  // Super speed
+
 #define FL_GODMODE              0x00000010
-#define FL_ONEHIT               0x00010100  
 #define FL_NOTARGET             0x00000020
 #define FL_DEFENSE_CROUCH       0x00000100  // warzombie defense pose
 #define FL_TEAMSLAVE            0x00000400  // not the first on the team
@@ -254,9 +257,7 @@ struct gentity_s {
 	char        *targetShaderNewName;
 	gentity_t   *target_ent;
 
-	float 
-		
-		;
+	float speed;
 	float closespeed;           // for movers that close at a different speed than they open
 	vec3_t movedir;
 

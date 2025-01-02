@@ -1066,6 +1066,7 @@
 {"Cmd_Noclip_f", (byte *)Cmd_Noclip_f},
 {"Cmd_Notarget_f", (byte *)Cmd_Notarget_f},
 {"Cmd_Nofatigue_f", (byte *)Cmd_Nofatigue_f},
+{"Cmd_Sonic_f", (byte *)Cmd_Sonic_f},
 {"Cmd_OneHit_f", (byte *)Cmd_OneHit_f},
 {"Cmd_God_f", (byte *)Cmd_God_f},
 {"Cmd_Give_f", (byte *)Cmd_Give_f},

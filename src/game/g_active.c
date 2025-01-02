@@ -413,6 +413,10 @@ void SpectatorThink( gentity_t *ent, usercmd_t *ucmd ) {
 
 	if ( ent->flags & FL_NOFATIGUE ) {
 		ent->client->ps.sprintTime = 20000;
+		ent->client->ps.sprintSpeedScale = 300;
+		ent->client->ps.speed = 300;
+		ent->client->ps.runSpeedScale = 300;
+		ent->client->ps.crouchSpeedScale = 300;
 	}
 
 
@@ -1354,6 +1358,10 @@ void ClientThink_real( gentity_t *ent ) {
 		ent->client->ps.sprintTime = 20000;
 	}
 
+	if (ent->flags & FL_SONIC) {
+		ent->client->ps.sprintSpeedScale = 10;
+		ent->client->ps.runSpeedScale = 10;
+	}
 
 	// Ridah, AI's don't respawn
 	if ( !( ent->r.svFlags & SVF_CASTAI ) ) {

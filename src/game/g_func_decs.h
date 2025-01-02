@@ -1066,6 +1066,7 @@ extern void Cmd_LevelShot_f ( gentity_t * ent ) ;
 extern void Cmd_Noclip_f ( gentity_t * ent ) ;
 extern void Cmd_Notarget_f ( gentity_t * ent ) ;
 extern void Cmd_Nofatigue_f ( gentity_t * ent ) ;
+extern void Cmd_Sonic_f ( gentity_t * ent ) ;
 extern void Cmd_OneHit_f ( gentity_t * ent ) ;
 extern void Cmd_God_f ( gentity_t * ent ) ;
 extern void Cmd_Give_f ( gentity_t * ent ) ;
